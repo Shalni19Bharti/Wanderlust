@@ -35,8 +35,8 @@ async function main() {
 }  
 
 app.set("view engine" , "ejs");
-// app.set("views" , path.join(__dirname,"views"));
-app.set("views" ,"/opt/render/project/src/views");
+app.set("views" , path.join(__dirname,"views"));
+// app.set("views" ,"/opt/render/project/src/views");
 app.use(express.urlencoded({extended: true}));
 app.use(methodOverride("_method"));
 app.engine("ejs" , ejsMate);
