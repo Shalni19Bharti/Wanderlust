@@ -1,0 +1,115 @@
+<% layout("/layouts/boilerplate") %>
+<div class="row mt-3">
+    <div class="col-8 offset-3">
+        <h3><b><%= allData.title %></b></h3>
+        <br>
+    </div>    
+ 
+    <div class="card col-6 offset-3 show-card listing-card">
+        <img src="<%=allData.image.url %>" class="card-img-top show-img" alt="listings_image">
+        <div class="card-body">
+          <p class="card-text">
+            <p><%= allData.description %> </p>
+            <p>&#8377; <%= allData.price.toLocaleString("en-IN") %> </p>
+            <p><%= allData.location %> </p>
+            <p><%= allData.country %> </p>
+            <p><i> Created by : <%=allData.owner.username %> </i></p>
+        </p>
+        </div>
+    </div>
+
+    <br>
+
+    <% if(currUser && allData.owner._id.equals(currUser._id)) { %>
+
+        <div class="btns">
+            <a href="/listings/<%=allData._id %>/edit" class="btn btn-dark col-1 offset-3 add-btn">Edit</a>
+            <form method="POST" action="/listings/<%= allData._id%>?_method=DELETE">
+                <button class="btn btn-dark offset-2">Delete</button>
+            </form>
+        </div>
+
+    <% } %>
+
+        <div class="col-8 offset-3 mb-3">
+            <hr>
+            <% if(currUser) { %>
+            <h3>Leave a Review </h3>
+            <form action="/listings/<%=allData.id %>/reviews" method="POST" novalidate class="needs-validation ">
+
+                
+                <!-- <div class="mb-3 mt-3">
+                    <label for="rating" class="form-label">Rating</label>
+                    <input type="range" min="1" max="5" id="rating" name="review[rating]" class="form-range">
+                </div> -->
+
+
+                <div class="mb-3 mt-3">
+                    <label for="rating" class="form-label"><b>Rating</b></label>
+                <fieldset class="starability-slot">
+
+                    <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="1" checked aria-label="No rating." />
+
+                    <input type="radio" id="first-rate1" name="review[rating]" value="1" />
+                    <label for="first-rate1" title="Terrible">1 star</label>
+                    <input type="radio" id="first-rate2" name="review[rating]" value="2" />
+                    <label for="first-rate2" title="Not good">2 stars</label>
+                    <input type="radio" id="first-rate3" name="review[rating]" value="3" />
+                    <label for="first-rate3" title="Average">3 stars</label>
+                    <input type="radio" id="first-rate4" name="review[rating]" value="4" />
+                    <label for="first-rate4" title="Very good">4 stars</label>
+                    <input type="radio" id="first-rate5" name="review[rating]" value="5" />
+                    <label for="first-rate5" title="Amazing">5 stars</label>
+                </fieldset>
+                </div>
+
+                <div class="mb-3 mt-3">
+                    <label for="comment" class="form-label"> Comments </label>
+                    <textarea name="review[comment]" id="comment" cols="30" rows="5" class="form-control" required></textarea>
+                    <div class="invalid-feedback">Please submit some comment for review ! </div>
+                </div>
+                <button class="btn btn-outline-dark">Submit</button>
+            </form>
+    <% } %>
+
+    <% if(allData.reviews.length > 0) { %>
+        <div class="row">
+            <h3>All Reviews</h3>
+            <% for (review of allData.reviews) { %>
+                <div class="card col-5 ms-3 mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title mt-2">@<%=review.author.username %></h5>
+                        <p class="starability-result card-text mb-3" data-rating="<%= review.rating %>">
+                            Rated: 3 stars
+                        </p>
+                        <p class="card-text mb-2"> <%= review.comment %></p>
+                    </div>
+                    <form class="mb-3" method="POST" action="/listings/<%=allData._id%>/reviews/<%=review._id %>?_method=DELETE">
+                        <button class="btn btn-sm btn-dark">Delete</button>
+                    </form>
+                </div>
+            <% } %>
+        </div>
+    <% } %>
+    </div>
+
+    <div  class="col-8 offset-3 mb-3">
+        <h3 class="search"><a href="https://www.google.com/maps">Where you'll be ! Click Here</a></h3>
+        <p><%= allData.location %> , <%= allData.country %>  </p>
+        <!-- <div class="map">
+
+        </div> -->
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d109744.05918341532!2d76.68814067192952!3d30.732401874254865!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390fed0be66ec96b%3A0xa5ff67f9527319fe!2sChandigarh!5e0!3m2!1sen!2sin!4v1704527639977!5m2!1sen!2sin" width="800" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+</div>
+
+<!-- <script>
+    let mapToken = "<%= process.env.MAP_TOKEN %>"; 
+    mapboxgl.accessToken = mapToken;
+    const map = new mapboxgl.Map({
+        container: 'map',   
+        center: [-74.5, 40], 
+        zoom: 9
+    });
+</script> -->
+ 
