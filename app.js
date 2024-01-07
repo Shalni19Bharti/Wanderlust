@@ -1,6 +1,6 @@
 if(process.env.NODE_ENV != "production"){
   require('dotenv').config();
-}
+};
 
 const express = require("express");
 const app = express();
@@ -74,30 +74,10 @@ passport.use(new localStrategy (User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-// app.get("/testListing" , async (req , res) => {
-//   let sampleListing = new Listing ({
-//     title : "My new Villa" ,
-//     description : "By the beach" ,
-//     price : 1200 ,
-//     location : "Near Chandigarh " ,
-//     country : " India" ,
-//   });
-
-//   await sampleListing.save()
-//   .then( () => {
-//     console.log("Successfully Saved") ;
-//   })
-//   .catch ( (e) => {
-//     console.log(e);
-//   })
-//   res.send("Successful");
-// });
-
 app.use((req,res,next) => {
   res.locals.success = req.flash("success");
   res.locals.error = req.flash("error");
   res.locals.currUser = req.user;
-  // console.log(res.locals.success);
   next();
 });
 
@@ -123,7 +103,6 @@ app.all("*" , (req ,res , next) => {
 
 app.use((err,req,res,next)=>{
   let{statusCode=500 , message ="Something Went Wrong"} = err;
-  // res.status(statusCode).send(message);
   res.status(statusCode).render("error.ejs" , {message , err});
 });
 
