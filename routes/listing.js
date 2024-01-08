@@ -12,29 +12,29 @@ const upload = multer({ storage });
 
 // INDEX ROUTE 
 
-router.get("/",wrapAsync(listingController.index));
+  router.get("/",wrapAsync(listingController.index));
   
-  // NEW ROUTE 
+// NEW ROUTE 
   
   router.get("/new" , isLoggedIn , listingController.new);
   
-  // SHOW ROUTE 
+// SHOW ROUTE 
   
   router.get("/:id" , wrapAsync(listingController.showListing));
   
-  // CREATE ROUTE
+// CREATE ROUTE
   
   router.post("/" , isLoggedIn, upload.single('listing[image]'),  validateListing , wrapAsync(listingController.createListings));
   
-  // EDIT ROUTE 
+// EDIT ROUTE 
   
   router.get("/:id/edit" , isLoggedIn , isOwner ,  wrapAsync (listingController.editform));
   
-  //UPDATE ROUTE 
+//UPDATE ROUTE 
   
   router.put("/:id" , isLoggedIn , isOwner, upload.single('listing[image]'), validateListing , wrapAsync (listingController.updateListings));
   
-  // DELETE ROUTE 
+// DELETE ROUTE 
   
   router.delete("/:id" ,isLoggedIn,isOwner, wrapAsync(listingController.deleteListings));
 
