@@ -88,11 +88,7 @@
     }
 
 </style>
-    <!-- <h1>All Listings</h1> -->
-    <!--<form method="GET" action="/listings/new">
-     <button>New Listings</button>
-    </form>-->
-
+ 
     <div class="filters">
 
         <div class="arrow">
@@ -170,8 +166,9 @@
         </div>
     </div>
 
+    <br>
     <!-- CARDS -->
-    <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3">
+    <div class="row row-cols-lg-3  row-cols-md-2 row-cols-sm-1 mt-3">
         <% for (data of datas) { %>
             <a href="/listings/<%= data._id %>" class="listing-link">
                 <div class="card col listing-card" >

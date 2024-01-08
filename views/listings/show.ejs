@@ -2,19 +2,61 @@
     .search:hover{
         text-decoration: underline;
     }
+    .centered-map {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 450px;
+    max-width: 800px;
+  }
+    @media(min-width:1201px) and (max-width:1400px){
+        .map{
+            width:600;
+        }
+    }
+    @media(min-width:1000px) and (max-width:1200px){
+        .map{
+            width:500;
+            height:400;
+        }
+    }
+    @media(min-width:790px) and (max-width:1000px){
+        .map{
+            width:400;
+            height:350;
+        }
+    }
+    @media(min-width:520px) and (max-width:790px){
+        .map{
+            width:300;
+            height:300;
+        }
+    }
+    @media(min-width:345px) and (max-width:520px){
+        .map{
+            width:200;
+            height: 200;
+        }
+    }
+    @media(min-width:200px) and (max-width:345px){
+        .map{
+            width:200;
+            height: 200;
+        }
+    }
 </style>
 
 <% layout("/layouts/boilerplate") %>
 <div class="row mt-3">
-    <div class="col-8 offset-3">
+    <div class="col-8 offset-2">
         <h3><b><%= allData.title %></b></h3>
         <br>
     </div>    
  
-    <div class="card col-6 offset-3 show-card listing-card">
+    <div class="card col-6 offset-2 show-card listing-card">
         <img src="<%=allData.image.url %>" class="card-img-top show-img" alt="listings_image">
         <div class="card-body">
-          <p class="card-text">
+        <p class="card-text">
             <p><%= allData.description %> </p>
             <p>&#8377; <%= allData.price.toLocaleString("en-IN") %> </p>
             <p><%= allData.location %> </p>
@@ -29,7 +71,8 @@
     <% if(currUser && allData.owner._id.equals(currUser._id)) { %>
 
         <div class="btns">
-            <a href="/listings/<%=allData._id %>/edit" class="btn btn-dark col-1 offset-3 add-btn">Edit</a>
+            <a href="/listings/<%=allData._id %>/edit" class="btn btn-dark col-md-1 offset-2 add-btn">Edit</a><br>
+
             <form method="POST" action="/listings/<%= allData._id%>?_method=DELETE">
                 <button class="btn btn-dark offset-2">Delete</button>
             </form>
@@ -37,7 +80,7 @@
 
     <% } %>
 
-        <div class="col-8 offset-3 mb-3">
+        <div class="col-8 offset-2 mb-3">
             <hr>
             <% if(currUser) { %>
             <h3>Leave a Review </h3>
@@ -64,18 +107,20 @@
 
                 <div class="mb-3 mt-3">
                     <label for="comment" class="form-label"> Comments </label>
-                    <textarea name="review[comment]" id="comment" cols="30" rows="5" class="form-control" required></textarea>
+                    <textarea name="review[comment]" id="comment" cols="40" rows="5" class="form-control" required></textarea>
                     <div class="invalid-feedback">Please submit some comment for review ! </div>
                 </div>
-                <button class="btn btn-outline-dark">Submit</button>
+                <button class="btn btn-outline-dark mt-2 mb-3">Submit</button>
             </form>
     <% } %>
 
     <% if(allData.reviews.length > 0) { %>
         <div class="row">
-            <h3>All Reviews</h3>
+            <h3 class="mb-3">All Reviews</h3>
+            <br>
             <% for (review of allData.reviews) { %>
-                <div class="card col-5 ms-3 mb-3">
+                    <div class="card col-12 col-md-5 offset-md-3 ms-md-3 mb-3">
+
                     <div class="card-body">
                         <h5 class="card-title mt-2">@<%=review.author.username %></h5>
                         <p class="starability-result card-text mb-3" data-rating="<%= review.rating %>">
@@ -86,17 +131,22 @@
                     <form class="mb-3" method="POST" action="/listings/<%=allData._id%>/reviews/<%=review._id %>?_method=DELETE">
                         <button class="btn btn-sm btn-dark">Delete</button>
                     </form>
+
                 </div>
             <% } %>
         </div>
-    <% } %>
+    <% } %> 
+</div>
+
+    <div  class="col-8 offset-2 mb-3">
+        <h3>Where you'll be !</h3>
+        <h3 class="search"><a href="https://www.google.com/maps">Click Here</a></h3>
+        <p><%= allData.location %> , <%= allData.country %>  </p>
+        <div class="centered-map map">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d109744.05918341532!2d76.68814067192952!3d30.732401874254865!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390fed0be66ec96b%3A0xa5ff67f9527319fe!2sChandigarh!5e0!3m2!1sen!2sin!4v1704527639977!5m2!1sen!2sin" width="800" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
     </div>
 
-    <div  class="col-8 offset-3 mb-3">
-        <h3 class="search"><a href="https://www.google.com/maps">Where you'll be ! Click Here</a></h3>
-        <p><%= allData.location %> , <%= allData.country %>  </p>
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d109744.05918341532!2d76.68814067192952!3d30.732401874254865!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390fed0be66ec96b%3A0xa5ff67f9527319fe!2sChandigarh!5e0!3m2!1sen!2sin!4v1704527639977!5m2!1sen!2sin" width="800" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-    </div>
 </div>
 
  

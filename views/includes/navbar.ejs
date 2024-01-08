@@ -18,36 +18,75 @@
     padding: 0.5rem 3rem 0.5rem 3rem;
     font-size: 1rem;
   }
+  .navbar {
+      transition: background-color 0.3s ease;
+    }
+
+  .nav-link{
+    color:#222222 !important;
+   }
+   .nav-link:hover{
+    border: 1px solid rgba(255, 255, 255, 0.602);
+   }
+   @media(min-width:0px) and (max-width:767px){
+    .nav-link{
+    color:#fff !important;
+   }
+   .disappear{
+    display: none;
+   }
+   .bold{
+    font-weight: bold;
+   }
+   }
+   /* .navbar-collapse {
+      transition: background-color 0.3s ease;
+    } */
+    .navbar-collapsed {
+      padding: 20px;
+      background-color: #343a40e0;
+    }
 </style>
 
+
 <nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
-    <div class="container-fluid">
+  <div class="container-fluid">
       <a class="navbar-brand" href="/listings"><i class="fa-regular fa-compass"></i></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-          <a class="nav-link" href="/listings">Explore</a>
-        </div>
-        <div class="navbar-nav ms-auto">
-          <form class="d-flex" role="search">
-            <input class="form-control me-2 search-input" type="search" placeholder="Search Destination">
-            <button class="btn btn-search" type="submit"><i class="fa-solid fa-magnifying-glass"></i>Search</button>
-          </form>
-        </div>
-        <div class="navbar-nav ms-auto">
-          <a class="nav-link" href="/listings/new">Wanderlust your home &nbsp; <i class="fa-solid fa-globe"></i></a>
-          <% if(currUser){ %>
-            <a class="nav-link" href="/logout"><b>Sign Out</b></a>
-           <% } %>
-           <% if(!currUser) { %>
-            <a class="nav-link" href="/signup"><b>Sign Up</b></a>
-            <a class="nav-link" href="/login"><b>Login</b></a>
-           <% } %>
-        </div>
+          <div class="navbar-nav">
+            <a class="nav-link " href="/listings"><b>Explore</b></a>
+          </div>
+          <div class="navbar-nav ms-auto disappear">
+            <form class="d-flex mt-1 mb-1" role="search">
+              <input class="form-control me-2 search-input" type="search" placeholder="Search Destination">
+              <button class="btn btn-search" type="submit"><i class="fa-solid fa-magnifying-glass"></i>Search</button>
+            </form>
+          </div>
+          <div class="navbar-nav ms-auto">
+            <a class="nav-link bold" href="/listings/new">Wanderlust your home &nbsp; <i class="fa-solid fa-globe disappear"></i></a>
+            <% if(currUser){ %>
+              <a class="nav-link bold" href="/logout"><b>Sign Out</b></a>
+             <% } %>
+             <% if(!currUser) { %>
+              <a class="nav-link " href="/signup"><b>Sign Up</b></a>
+              <a class="nav-link " href="/login"><b>Login</b></a>
+             <% } %>
+          </div>
       </div>
-
-    </div>
+  </div>
 </nav>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var navbarCollapse = document.querySelector('.navbar-collapse');
+    var navbarToggle = document.querySelector('.navbar-toggler');
+
+    navbarToggle.addEventListener('click', function () {
+      navbarCollapse.classList.toggle('navbar-collapsed');
+    });
+  });
+</script>

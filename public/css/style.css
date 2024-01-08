@@ -19,9 +19,6 @@ min-height: 100vh;
     color : #fe424d;
     font-size: 2rem;
 }
-.nav-link{
-    color:#222222 !important;
-}
 
 /* FOOTER */
 
@@ -115,7 +112,7 @@ min-height: 100vh;
     border-bottom: 1px solid rgba(128, 128, 128, 0.396);
     background-color: #ebebeb;
     color:white;
-    height:50px;
+    height:60px;
     display:flex;
     justify-content:center;
     align-items:center;
@@ -154,8 +151,12 @@ min-height: 100vh;
     border: 1px solid rgba(128, 128, 128, 0.189);
 }
 
-@media only screen and (max-width: 767px) {
-    .foot-panel1,
+@media only screen and (nax-width:100px){
+    .foot-panel1{
+        height:auto;
+    }
+}
+@media only screen and (max-width: 787px) {
     .foot-panel2 {
         height: auto;
     }
