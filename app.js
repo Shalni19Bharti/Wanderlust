@@ -3,6 +3,7 @@ if(process.env.NODE_ENV != "production"){
 };
 
 const express = require("express");
+const serverless = require("serverless-http");
 const app = express();
 const mongoose = require("mongoose");
 const path = require("path");
@@ -19,6 +20,7 @@ const User = require("./models/user.js");
 const listingRouter = require("./routes/listing.js");
 const reviewRouter = require("./routes/review.js");
 const userRouter = require("./routes/user.js");
+const router = require('./routes/listing.js');
 
 const dbUrl = process.env.ATLAS_DATABASES;
 
@@ -110,3 +112,6 @@ app.use((err,req,res,next)=>{
 app.listen(8080 , () => {
   console.log("App is Working");
 });
+
+app.use("/.netlify/functions/api" , router);
+module.exports.handler = serverless(app);
