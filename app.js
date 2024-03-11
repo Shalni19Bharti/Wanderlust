@@ -4,19 +4,16 @@ if(process.env.NODE_ENV != "production"){
 
 // INITIALIZING THE FIREBASES 
 
-const firebaseConfig = {
-  apiKey: "AIzaSyBogMHjvhe2RE5UduZFl-MI1zWF1MLmM2k",
-  authDomain: "wanderlust-2014a.firebaseapp.com",
-  projectId: "wanderlust-2014a",
-  storageBucket: "wanderlust-2014a.appspot.com",
-  messagingSenderId: "550080145897",
-  appId: "1:550080145897:web:210f51c05611d68beb0378",
-  measurementId: "G-6HS6TZ20D0"
-};
-
-const app1 = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app1);
-
+// const firebaseConfig = {
+//   apiKey: "AIzaSyBogMHjvhe2RE5UduZFl-MI1zWF1MLmM2k",
+//   authDomain: "wanderlust-2014a.firebaseapp.com",
+//   databaseURL: "https://wanderlust-2014a-default-rtdb.firebaseio.com",
+//   projectId: "wanderlust-2014a",
+//   storageBucket: "wanderlust-2014a.appspot.com",
+//   messagingSenderId: "550080145897",
+//   appId: "1:550080145897:web:210f51c05611d68beb0378",
+//   measurementId: "G-6HS6TZ20D0"
+// };
 
 const express = require("express");
 const serverless = require("serverless-http");
